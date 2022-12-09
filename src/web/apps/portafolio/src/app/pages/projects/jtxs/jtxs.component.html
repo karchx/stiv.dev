@@ -1,0 +1,38 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+  <div
+    class="bg-white p-6 rounded-lg shadow-sm dark:bg-gray-700"
+    *ngFor="let project of projects"
+  >
+    <div class="md:flex-shrink-0">
+      <img
+        class="h-48 w-full object-cover md:h-48 md:w-full lg:blur-sm md:hover:blur-none animate__animated animate__bounce cursor-cards"
+        [src]="project.image"
+        alt="image project"
+      />
+    </div>
+
+    <div class="p-8">
+      <div
+        class="uppercase tracking-wide text-sm text-indigo-500 font-semibold dark:text-white"
+      >
+        <h3 class="text-lg">{{ project.title }}</h3>
+      </div>
+      <p class="mt-2 text-gray-500 dark:text-white">
+        {{ project.description }}
+      </p>
+    </div>
+
+    <div class="px-6 pt-4 pb-2">
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 lg:inline-flex hover:cursor-pointer"
+      >
+        <a [href]="project.urlGithub"> <i class="fab fa-github mr-1 mt-1"></i>Github </a>
+      </span>
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 lg:inline-flex hover:cursor-pointer"
+      >
+        <a [href]="project.urlDemo"> <i class="fas fa-globe mr-1 mt-1"></i>Web </a>
+      </span>
+    </div>
+  </div>
+</div>

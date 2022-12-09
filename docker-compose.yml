@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  shell-web:
+    build:
+      context: ./dockerfiles
+      dockerfile: ng.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    container_name: shell-web
+    volumes:
+      - ./src:/src
+    working_dir: /src/web
+    ports:
+      - 4200:4200
+    command: nx serve --host 0.0.0.0 --poll 2000
