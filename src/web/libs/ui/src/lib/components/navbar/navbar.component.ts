@@ -1,13 +1,15 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { MenuService } from "../../service/menu/menu.service";
+
+import { MenuService } from '../../services/menu.service';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styles: []
+  selector: "ui-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"]
 })
-export class HeaderComponent {
+export class NavbarComponent {
+
   constructor(private menuService: MenuService, public router: Router) {}
 
   isOpen: boolean = true;
@@ -20,4 +22,5 @@ export class HeaderComponent {
   menuHeader() {
     this.isOpenHeader = !this.isOpenHeader;
   }
+
 }

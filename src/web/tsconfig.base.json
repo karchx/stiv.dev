@@ -16,7 +16,10 @@
     "target": "es2017",
     "module": "es2020",
     "lib": ["es2018", "dom"],
-    "paths": {},
+    "paths": {
+      "@libs/ui": ["libs/ui/src/index.ts"],
+      "@libs/ui-shell": ["libs/ui-shell/src/index.ts"]
+    },
     "rootDir": "."
   },
   "angularCompilerOptions": {
