@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { MenuService } from '../../services/menu.service';
+import { MenuService } from "../../services/menu.service";
+import { LinkTreeService } from "@libs/ui-shell"
 
 @Component({
   selector: "ui-navbar",
@@ -10,7 +11,13 @@ import { MenuService } from '../../services/menu.service';
 })
 export class NavbarComponent {
 
-  constructor(private menuService: MenuService, public router: Router) {}
+  links$ = this.linkTreeService.getLinks();
+
+  constructor(
+    private menuService: MenuService,
+    private linkTreeService: LinkTreeService,
+    public router: Router
+  ) {}
 
   isOpen: boolean = true;
   isOpenHeader: boolean = true;

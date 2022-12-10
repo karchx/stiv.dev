@@ -26,28 +26,23 @@
       <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8 lg:mb-4">
         <a
           class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
-          [ngClass]="router.url === '/' ? '' : 'hidden'"
           routerLink="projects/jtxs"
         >
           <i class="fas fa-project-diagram fa-sm mr-2"></i> Projects
         </a>
 
         <a
-          href="https://github.com/KenethSandoval"
-          class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
+         *ngFor="let link of links$|async"
+         [href]="link?.link"
+         class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
         >
-          <i class="fab fa-github"></i>
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/keneth-sandoval"
-          class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
-          ><i class="fab fa-linkedin-in"></i>
+          <i [class]="link?.icon"></i>
         </a>
       </div>
     </nav>
   </div>
 
+  <!-- Mobile -->
   <div
     class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
     [ngClass]="isOpenHeader ? 'hidden' : ''"
@@ -73,17 +68,13 @@
         >
           <i class="fas fa-project-diagram fa-sm mr-2"></i> Projects
         </a>
-        <a
-          href="https://github.com/KenethSandoval"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-500 dark:text-white"
-          ><i class="fab fa-github mr-2"></i>Github</a
-        >
 
         <a
-          href="https://www.linkedin.com/in/keneth-sandoval"
+          *ngFor="let link of links$|async"
+          [href]="link?.link"
           class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-500 dark:text-white"
-          ><i class="fab fa-linkedin-in mr-2"></i>Linkedin</a
-        >
+          ><i [class]="link?.icon" class="mr-2"></i> {{ link?.tooltip }}
+        </a>
       </div>
     </div>
   </div>
