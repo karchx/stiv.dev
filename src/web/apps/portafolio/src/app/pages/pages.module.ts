@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 
-import { AboutComponent } from "../shared/about/about.component";
 import { ContactComponent } from "../shared/contact/contact.component";
 import { HomeComponent } from "./home/home.component";
 import { PagesComponent } from "./pages.component";
@@ -15,14 +14,13 @@ import { DevosComponent } from "./projects/devos/devos.component";
 import { LinuxComponent } from "./projects/linux/linux.component";
 import { GolangComponent } from "./projects/golang/golang.component";
 
-import { NavbarModule } from '@libs/ui';
+import { ComponentsModule } from '@libs/ui';
 
 @NgModule({
   declarations: [
     HomeComponent,
     MainComponent,
     SidebarComponent,
-    AboutComponent,
     ContactComponent,
     ProjectsComponent,
     PagesComponent,
@@ -32,6 +30,6 @@ import { NavbarModule } from '@libs/ui';
     GolangComponent
   ],
   exports: [PagesComponent],
-  imports: [CommonModule, RouterModule, HttpClientModule, NavbarModule]
+  imports: [CommonModule, RouterModule, HttpClientModule, ComponentsModule]
 })
 export class PagesModule {}
