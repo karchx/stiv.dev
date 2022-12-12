@@ -25,13 +25,6 @@
 
       <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8 lg:mb-4">
         <a
-          class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
-          routerLink="projects/jtxs"
-        >
-          <i class="fas fa-project-diagram fa-sm mr-2"></i> Projects
-        </a>
-
-        <a
          *ngFor="let link of links$|async"
          [href]="link?.link"
          class="font-medium text-gray-500 hover:text-gray-900 dark:text-white cursor-pointer"
@@ -62,13 +55,6 @@
         </div>
       </div>
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <a
-          routerLink="projects/jtxs"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-500 dark:text-white"
-        >
-          <i class="fas fa-project-diagram fa-sm mr-2"></i> Projects
-        </a>
-
         <a
           *ngFor="let link of links$|async"
           [href]="link?.link"
