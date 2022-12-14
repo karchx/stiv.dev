@@ -16,5 +16,6 @@ RUN SHELL=bash pnpm setup \
 RUN pnpm add -g @angular/cli nx
 
 EXPOSE 4200
+EXPOSE 3333
 
 WORKDIR /src/web
