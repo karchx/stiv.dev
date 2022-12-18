@@ -13,7 +13,7 @@ import { DevosComponent } from "./projects/devos/devos.component";
 import { LinuxComponent } from "./projects/linux/linux.component";
 import { GolangComponent } from "./projects/golang/golang.component";
 
-import { ComponentsModule } from '@libs/ui';
+import { ComponentsModule } from "@libs/ui";
 
 @NgModule({
   declarations: [

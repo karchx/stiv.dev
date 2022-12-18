@@ -11,5 +11,4 @@ export class AboutComponent {
   download() {
     window.open("../../../assets/document/cv_keneth.pdf", "Download");
   }
-
 }

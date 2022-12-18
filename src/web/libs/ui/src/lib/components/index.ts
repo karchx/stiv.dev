@@ -1,1 +1,1 @@
-export { ComponentsModule } from './components.module';
+export { ComponentsModule } from "./components.module";

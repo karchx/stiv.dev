@@ -8,12 +8,7 @@ import { ContactComponent } from "./contact/contact.component";
 import { MainComponent } from "./main/main.component";
 
 @NgModule({
-  declarations: [
-    SidebarComponent,
-    AboutComponent,
-    ContactComponent,
-    MainComponent
-  ],
+  declarations: [SidebarComponent, AboutComponent, ContactComponent, MainComponent],
   exports: [],
   imports: [CommonModule, RouterModule]
 })
