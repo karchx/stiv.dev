@@ -33,10 +33,6 @@ export class Server {
       console.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
-
-    router.get('/status', (req, res) => {
-      res.send({ message: 'hello'});
-    })
   }
 
   async listen(): Promise<void> {
