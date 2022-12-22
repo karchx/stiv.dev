@@ -1,14 +1,15 @@
-import { Router } from "express";
+import {Router} from "express";
 import glob from "glob";
 
 export function registerRoutes(router: Router) {
-  const dirname = "/src/web/apps/backend";
-  const routes = glob.sync(`${dirname}/**/*.route.ts`);
+  const routes = glob.sync(`**/*.route.*`);
+  console.log(routes);
   routes.map(route => register(route, router));
 }
 
-function register(routePath: string, router: Router) {
-  console.log(routePath);
+
+
+async function register(routePath: string, app: Router) {
   const route = require(routePath);
-  route.register(router);
+  // route.register(app);
 }
