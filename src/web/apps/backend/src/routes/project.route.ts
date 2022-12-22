@@ -1,9 +1,10 @@
-import { Request, Response, Router } from "express";
+import container from "@api/dependency-injection";
+import { Router } from "express";
+import ProjectsController from "../controllers/ProjectGetController";
 
 export const register = (router: Router) => {
-  router.get("/project", (req: Request, res: Response) => {
-    res.status(200).json({
-      message: 'project'
-    });
-  });
+  const controller: ProjectsController = container.get(
+    "Apps.controllers.ProjectsController"
+  );
+  router.get("/project", controller.run.bind(controller));
 };

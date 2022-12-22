@@ -1,15 +1,8 @@
-import {Router} from "express";
-import glob from "glob";
+import { Router } from "express";
+import { register as registerStatus } from "./status.route";
+import { register as projectStatus } from "./project.route";
 
 export function registerRoutes(router: Router) {
-  const routes = glob.sync(`**/*.route.*`);
-  console.log(routes);
-  routes.map(route => register(route, router));
-}
-
-
-
-async function register(routePath: string, app: Router) {
-  const route = require(routePath);
-  // route.register(app);
+  registerStatus(router);
+  projectStatus(router);
 }
