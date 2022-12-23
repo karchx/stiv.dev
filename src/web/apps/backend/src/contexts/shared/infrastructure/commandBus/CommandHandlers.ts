@@ -1,5 +1,5 @@
-import {Command} from "../../domain/Command";
-import {CommandHandler} from "../../domain/CommandHandler";
+import { Command } from "../../domain/Command";
+import { CommandHandler } from "../../domain/CommandHandler";
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
   constructor(commandHandlers: CommandHandler<Command>[]) {
@@ -15,7 +15,7 @@ export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
 
     if (!commandHandler) {
       console.error("Error");
-      throw "Error"
+      throw "Error";
     }
 
     return commandHandler;
