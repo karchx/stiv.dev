@@ -1,5 +1,6 @@
 import { Command } from "../../domain/Command";
 import { CommandHandler } from "../../domain/CommandHandler";
+import { CommandNotRegisteredError } from "../../domain/CommandNotRegisteredError";
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
   constructor(commandHandlers: CommandHandler<Command>[]) {
@@ -14,8 +15,7 @@ export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
     const commandHandler = super.get(command.constructor);
 
     if (!commandHandler) {
-      console.error("Error");
-      throw "Error";
+      throw new CommandNotRegisteredError(command);
     }
 
     return commandHandler;
