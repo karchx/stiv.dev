@@ -30,5 +30,12 @@ export class Project extends AggregateRoot {
     return project;
   }
 
-  toPrimitives() {}
+  toPrimitives() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      github: this.github
+    }
+  }
 }
