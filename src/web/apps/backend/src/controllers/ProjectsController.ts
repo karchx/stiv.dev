@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
+import {ProjectCreator} from "../context/mooc/application/ProjectCreator";
 import { Controller } from "./Controller";
 
 type CreateProjectRequest = {
@@ -7,17 +8,23 @@ type CreateProjectRequest = {
   title: string;
   description: string;
   github: string;
-  deploy?: string;
-  image?: string;
+  tags: string[];
+  web?: string;
 };
 
-export default class ProjectsController implements Controller {
+export default class ProjectsController implements Controller<CreateProjectRequest> {
+  constructor(private projectCreator: ProjectCreator) {}
+
 
   async run(req: Request<CreateProjectRequest>, res: Response): Promise<void> {
-    await this.createProject(req);
-    res.status(httpStatus.OK).send();
-  }
-
-  private async createProject(req: Request<CreateProjectRequest>) {
+    try {
+      const { id, title, description, github, tags, web } = req.body;
+      // await this.projectCreator.run(id, title, description, github, tags, web);
+      this.projectCreator.run();
+      res.status(httpStatus.CREATED).send();
+    } catch(err) {
+      console.error(err);
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
 
-export interface Controller {
-  run(req: Request, res: Response): Promise<void>;
+export interface Controller<T> {
+  run(req: Request<T>, res: Response): Promise<void>;
 }
