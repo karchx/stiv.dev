@@ -1,7 +1,8 @@
-import { BackofficeBackendApp } from "./BackofficeBackendApp";
+import {Server} from "./server";
 
 try {
-  new BackofficeBackendApp().start().catch(handleError);
+  const port = process.env.PORT || "3333";
+  new Server(port).listen();
 } catch (e) {
   handleError(e);
 }

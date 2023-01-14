@@ -1,10 +1,8 @@
-import container from "@api/dependency-injection";
-import { Router } from "express";
-import StatusController from "../controllers/StatusGetController";
+import {Request, Response, Router} from "express";
+import httpStatus from "http-status";
 
 export const register = (router: Router) => {
-  const controller: StatusController = container.get(
-    "Apps.controllers.StatusGetController"
-  );
-  router.get("/status", controller.run.bind(controller));
+  router.get("/status", (req: Request, res: Response) => {
+    res.sendStatus(httpStatus.OK);
+  });
 };
