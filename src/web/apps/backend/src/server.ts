@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 import helmet from "helmet";
 import Router from "express-promise-router";
 import cors from "cors";
-import { registerRoutes } from "./routes";
+import {Routes} from "./interfaces/routes.interface";
 
 export class Server {
   private express: express.Express;
@@ -27,7 +27,6 @@ export class Server {
     router.use(cors());
     router.use(errorHandler());
     this.express.use(router);
-    registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response, next: Function) => {
       console.error(err);
@@ -61,6 +60,12 @@ export class Server {
       }
 
       return resolve();
+    });
+  }
+
+  private initializeRoutes(routes: Routes[]) {
+    routes.forEach(route => {
+      this.express.use('/', route.router);
     });
   }
 }

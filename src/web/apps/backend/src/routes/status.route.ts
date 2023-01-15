@@ -1,8 +1,17 @@
-import {Request, Response, Router} from "express";
-import httpStatus from "http-status";
+import {IndexController} from "@/controllers/index.controller";
+import {Routes} from "@interfaces/routes.interface";
+import {Router} from "express";
 
-export const register = (router: Router) => {
-  router.get("/status", (req: Request, res: Response) => {
-    res.sendStatus(httpStatus.OK);
-  });
-};
+export class StatusRoute implements Routes {
+  public path = "/";
+  public router = Router();
+  public indexController = new IndexController();
+
+  constructor() {
+    this.initializeRoutes();
+  }
+
+  private initializeRoutes() {
+    this.router.get(`${this.path}`, this.indexController.index);
+  }
+}

@@ -19,7 +19,7 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@libs/ui": ["libs/ui/src/index.ts"],
-      "@libs/ui-shell": ["libs/ui-shell/src/index.ts"]
+      "@libs/ui-shell": ["libs/ui-shell/src/index.ts"],
     },
     "rootDir": "."
   },
