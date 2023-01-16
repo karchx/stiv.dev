@@ -1,5 +1,5 @@
-import {StatusRoute} from "./routes/status.route";
-import {Server} from "./server";
+import { StatusRoute } from "./routes/status.route";
+import { Server } from "./server";
 
 try {
   const port = process.env.PORT || "3333";

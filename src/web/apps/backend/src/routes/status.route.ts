@@ -1,6 +1,6 @@
-import {IndexController} from "@/controllers/index.controller";
-import {Routes} from "@interfaces/routes.interface";
-import {Router} from "express";
+import { IndexController } from "@/controllers/index.controller";
+import { Routes } from "@interfaces/routes.interface";
+import { Router } from "express";
 
 export class StatusRoute implements Routes {
   public path = "/";

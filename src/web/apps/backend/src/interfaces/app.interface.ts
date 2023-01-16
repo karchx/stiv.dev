@@ -1,4 +1,4 @@
-import {Routes} from "./routes.interface";
+import { Routes } from "./routes.interface";
 
 export interface AppArgstType {
   routes: Routes[];

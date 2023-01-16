@@ -2,8 +2,8 @@ import express from "express";
 import compress from "compression";
 import * as http from "http";
 import helmet from "helmet";
-import {Routes} from "@interfaces/routes.interface";
-import {AppArgstType} from "@interfaces/app.interface";
+import { Routes } from "@interfaces/routes.interface";
+import { AppArgstType } from "@interfaces/app.interface";
 
 export class Server {
   private express: express.Express;
@@ -59,7 +59,7 @@ export class Server {
 
   private initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
-      this.express.use('/', route.router);
+      this.express.use("/", route.router);
     });
   }
 }
