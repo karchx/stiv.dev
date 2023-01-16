@@ -1,8 +1,15 @@
+import {StatusRoute} from "./routes/status.route";
 import {Server} from "./server";
 
 try {
   const port = process.env.PORT || "3333";
-  new Server(port).listen();
+  const routes = [new StatusRoute()];
+
+  const server = new Server({ port, routes });
+
+  server.configure();
+
+  server.listen();
 } catch (e) {
   handleError(e);
 }

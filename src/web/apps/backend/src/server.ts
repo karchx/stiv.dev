@@ -1,19 +1,17 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import compress from "compression";
-import errorHandler from "errorhandler";
 import * as http from "http";
-import httpStatus from "http-status";
 import helmet from "helmet";
-import Router from "express-promise-router";
-import cors from "cors";
-import {Routes} from "./interfaces/routes.interface";
+import {Routes} from "@interfaces/routes.interface";
+import {AppArgstType} from "@interfaces/app.interface";
 
 export class Server {
   private express: express.Express;
   readonly port: string;
   httpServer?: http.Server;
+  routes: Routes[];
 
-  constructor(port: string) {
+  constructor({ port, routes = [] }: AppArgstType) {
     this.port = port;
     this.express = express();
     this.express.use(express.json());
@@ -23,15 +21,7 @@ export class Server {
     this.express.use(helmet.hidePoweredBy());
     this.express.use(helmet.frameguard({ action: "deny" }));
     this.express.use(compress());
-    const router = Router();
-    router.use(cors());
-    router.use(errorHandler());
-    this.express.use(router);
-
-    router.use((err: Error, req: Request, res: Response, next: Function) => {
-      console.error(err);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-    });
+    this.routes = routes;
   }
 
   async listen(): Promise<void> {
@@ -42,6 +32,10 @@ export class Server {
         resolve();
       });
     });
+  }
+
+  configure() {
+    this.initializeRoutes(this.routes);
   }
 
   getHTTPServer() {
