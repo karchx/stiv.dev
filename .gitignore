@@ -2,3 +2,5 @@ src/.pnpm-store
 src/web/.angular
 src/web/.vscode
 mongo_data
+src/web/apps/backend/.env.dev.local
+src/web/apps/backend/.env
