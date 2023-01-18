@@ -4,23 +4,21 @@ import * as http from "http";
 import helmet from "helmet";
 import { Routes } from "@interfaces/routes.interface";
 import { AppArgstType } from "@interfaces/app.interface";
+import { connect, set } from "mongoose";
+import { dbConnection } from "./databases";
+import { NODE_ENV } from "./config";
 
 export class Server {
   private express: express.Express;
+  private env: string;
   readonly port: string;
   httpServer?: http.Server;
   routes: Routes[];
 
   constructor({ port, routes = [] }: AppArgstType) {
     this.port = port;
+    this.env = NODE_ENV || "development";
     this.express = express();
-    this.express.use(express.json());
-    this.express.use(express.urlencoded({ extended: true }));
-    this.express.use(helmet.xssFilter());
-    this.express.use(helmet.noSniff());
-    this.express.use(helmet.hidePoweredBy());
-    this.express.use(helmet.frameguard({ action: "deny" }));
-    this.express.use(compress());
     this.routes = routes;
   }
 
@@ -34,8 +32,26 @@ export class Server {
     });
   }
 
-  configure() {
-    this.initializeRoutes(this.routes);
+  async configure() {
+    this.connectToDatabase(() => {
+      this.initializeMiddlewares();
+      this.initializeRoutes(this.routes);
+    });
+  }
+
+  private async connectToDatabase(onSuccessConnect?: CallableFunction) {
+    if (this.env !== "production") {
+      set("debug", true);
+    }
+
+    try {
+      set("strictQuery", false);
+      await connect(dbConnection.url);
+      console.info("DB is connected: ", dbConnection.url);
+      onSuccessConnect?.();
+    } catch (e) {
+      console.error(`DB is not connected :( ${e}`);
+    }
   }
 
   getHTTPServer() {
@@ -55,6 +71,16 @@ export class Server {
 
       return resolve();
     });
+  }
+
+  private initializeMiddlewares() {
+    this.express.use(express.json());
+    this.express.use(express.urlencoded({ extended: true }));
+    this.express.use(helmet.xssFilter());
+    this.express.use(helmet.noSniff());
+    this.express.use(helmet.hidePoweredBy());
+    this.express.use(helmet.frameguard({ action: "deny" }));
+    this.express.use(compress());
   }
 
   private initializeRoutes(routes: Routes[]) {
