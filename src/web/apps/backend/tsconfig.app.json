@@ -8,7 +8,8 @@
     "paths": {
       "@/*": ["*"],
       "@interfaces/*": ["interfaces/*"],
-      "@config": ["config"]
+      "@config": ["config"],
+      "@utils/*": ["utils/*"]
     }
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],

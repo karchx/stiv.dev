@@ -1,12 +1,15 @@
 import express from "express";
 import compress from "compression";
+import morgan from "morgan";
 import * as http from "http";
 import helmet from "helmet";
+import { connect, set } from "mongoose";
+
 import { Routes } from "@interfaces/routes.interface";
 import { AppArgstType } from "@interfaces/app.interface";
-import { connect, set } from "mongoose";
+import { LOG_FORMAT, NODE_ENV } from "@config";
+import { stream } from "@utils/logger";
 import { dbConnection } from "./databases";
-import { NODE_ENV } from "./config";
 
 export class Server {
   private express: express.Express;
@@ -74,6 +77,7 @@ export class Server {
   }
 
   private initializeMiddlewares() {
+    this.express.use(morgan(LOG_FORMAT || "", { stream }));
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(helmet.xssFilter());
