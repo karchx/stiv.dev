@@ -9,7 +9,8 @@
       "@/*": ["*"],
       "@interfaces/*": ["interfaces/*"],
       "@config": ["config"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@models/*": ["models/*"]
     }
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
