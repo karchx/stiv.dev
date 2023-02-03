@@ -6,7 +6,7 @@ export class Project {
     public _id: string,
     public title: string,
     public description: string,
-    public urlGithub: string,
+    public github: string,
     public tags: Array<string>,
     public urlDemo: string,
     public image: string
