@@ -3,6 +3,7 @@ import compress from "compression";
 import morgan from "morgan";
 import * as http from "http";
 import helmet from "helmet";
+import cors from "cors";
 import { connect, set } from "mongoose";
 
 import { Routes } from "@interfaces/routes.interface";
@@ -85,6 +86,7 @@ export class Server {
     this.express.use(helmet.hidePoweredBy());
     this.express.use(helmet.frameguard({ action: "deny" }));
     this.express.use(compress());
+    this.express.use(cors())
   }
 
   private initializeRoutes(routes: Routes[]) {
