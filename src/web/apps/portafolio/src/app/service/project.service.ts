@@ -26,7 +26,7 @@ export class ProjectService {
               project.description,
               project.github,
               project.tags,
-              project.urlDemo,
+              project.web,
               project.image
             )
         );

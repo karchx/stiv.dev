@@ -8,7 +8,7 @@ export class Project {
     public description: string,
     public github: string,
     public tags: Array<string>,
-    public urlDemo: string,
+    public web: string,
     public image: string
   ) {}
 
