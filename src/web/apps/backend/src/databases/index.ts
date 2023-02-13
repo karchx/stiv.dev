@@ -1,8 +1,9 @@
-import { DBConnectionConfig } from "@/interfaces/database.interface";
-import { DB_HOST, DB_PORT, DB_DATABASE } from "@config";
+import {DBConnectionConfig} from "@/interfaces/database.interface";
+import {CLUSTER_MONGO, DB_HOST, DB_PASSWORD, DB_USER} from "@config";
 
 export const dbConnection: DBConnectionConfig = {
-  url: `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
+  url: `${DB_HOST}://${DB_USER}:${DB_PASSWORD}@${CLUSTER_MONGO}`,
+  //url: `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true
