@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/portafolio",
+      "use": "@vercel/static",
+      "config": {
+        "basePath": "/portafolio"
+      }
+    },
+    {
+      "src": "dist/apps/backend",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "dist/apps/backend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "apps/portafolio/$1"
+    }
+  ]
+}
