@@ -1,12 +1,24 @@
 {
   "version": 2,
+  "scope": "stiv_dev_vercel",
+  "github": {
+    "enabled": false
+  },
   "builds": [
     {
       "src": "./dist/apps/backend/main.js",
       "use": "@now/node"
+    },
+    {
+      "src": "./dist/apps/portafolio/*",
+      "use": "@now/static"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "./dist/apps/backend/main.js"}
+    { "src": "/api/(.*)", "dest": "./dist/apps/backend/main.js"},
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "./dist/apps/portafolio/assets/$1" },
+    { "src": "/(.*).(js|css|ico)", "dest": "./dist/apps/portafolio/$1.$2" },
+    { "src": "/(.*)", "dest": "./dist/apps/portafolio/index.html" }
   ]
 }
