@@ -8,6 +8,7 @@ services:
       args:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
+    image: karchx/shell-web
     container_name: shell-web
     volumes:
       - ./src:/src
@@ -23,6 +24,7 @@ services:
       args:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
+    image: karchx/shell-backend
     container_name: shell-backend
     volumes:
       - ./src:/src
