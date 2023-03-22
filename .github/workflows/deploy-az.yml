@@ -1,0 +1,37 @@
+name: Deploy to Azure using Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_REGISTRY: stivdev.azurecr.io
+  DOCKER_COMPOSE_VERSION: 1.29.2
+  COMPOSE_FILE: docker-compose.yml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install curl
+          curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" > docker-compose
+          chmod +x docker-compose
+          sudo mv docker-compose /usr/local/bin
+      - name: Configure Docker Compose environment
+        run: |
+          echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login "${DOCKER_REGISTRY}" --username "${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}" --password-stdin
+      - name: Build and push Docker images
+        run: |
+          docker-compose build
+          docker-compose push
+      - name: Deploy the app using Docker Compose
+        run: |
+          az login --service-principal --username "${{ secrets.AZURE_SP_APP_ID }}" --password "${{ secrets.AZURE_SP_PASSWORD }}" --tenant "${{ secrets.AZURE_SP_TENANT }}"
+          az acr run --registry "${DOCKER_REGISTRY}" --cmd "${COMPOSE_FILE}" --agent-pool my-agent-pool --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
