@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
-import { delay } from "rxjs/operators";
-import { ModalService } from "../../../services/modal.service";
-import { Project } from "../../../models/projects.model";
-import { ProjectService } from "../../../service/project.service";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Subscription} from "rxjs";
+import {delay} from "rxjs/operators";
+import {ModalService} from "../../../services/modal.service";
+import {IProject, Project} from "../../../models/projects.model";
+import {ProjectService} from "../../../service/project.service";
 
 @Component({
   selector: "app-jtxs",
@@ -11,8 +11,19 @@ import { ProjectService } from "../../../service/project.service";
   styles: []
 })
 export class JtxsComponent implements OnInit, OnDestroy {
-  public projects: Project[] = [];
-  public imgSubs!: Subscription;
+  projects: Project[] = [];
+  imgSubs!: Subscription;
+  defaultProjects: IProject[] = [
+    {
+      description: "Animation (or game?) With canvas and trying a few things with javascript (nerd)",
+      github: "https://github.com/karchx/wwsx",
+      image: "uploads/default.png",
+      tags: ["javascript", "js", "ts"],
+      title: "wwsx",
+      web: "https://karchx.github.io/wwsx/
+    }
+  ]
+
 
   constructor(
     private _projectService: ProjectService,
@@ -31,7 +42,7 @@ export class JtxsComponent implements OnInit, OnDestroy {
   }
 
   public getProjects() {
-    this._projectService.loadProjects().subscribe(({ projects }) => {
+    this._projectService.loadProjects().subscribe(({projects}) => {
       this.projects = projects.filter(c => c.tags.includes("js"));
     });
   }
