@@ -86,7 +86,7 @@ export class Server {
     this.express.use(helmet.hidePoweredBy());
     this.express.use(helmet.frameguard({ action: "deny" }));
     this.express.use(compress());
-    this.express.use(cors())
+    this.express.use(cors());
   }
 
   private initializeRoutes(routes: Routes[]) {
