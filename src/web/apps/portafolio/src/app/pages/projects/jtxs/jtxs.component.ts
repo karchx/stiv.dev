@@ -41,7 +41,20 @@ export class JtxsComponent implements OnInit, OnDestroy {
       .subscribe(() => this.getProjects());
   }
 
-  public getProjects() {
+  getProjects() {
+    this.projects = this.defaultProjects.map(
+      project =>
+        new Project(
+          project._id ?? "00000",
+          project.title,
+          project.description,
+          project.github,
+          project.tags,
+          project.web,
+          project.image
+        )
+    );
+
     this._projectService.loadProjects().subscribe({
       next: ({projects}) => {
         this.projects = projects.filter(c => c.tags.includes("js"));
